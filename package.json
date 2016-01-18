@@ -11,8 +11,8 @@
   },
   "keywords": [
     "deku",
-    "redux",
-    "connect"
+    "props",
+    "types"
   ],
   "author": "Dustin Specker <DustinSpecker@DustinSpecker.com> (http://dustinspecker.com/)",
   "license": "MIT",
