@@ -66,7 +66,7 @@ Validate prop is a string
 `propTypes.number.isRequired`
 
 ## Custom Validators
-A function may be passed instead of propType.
+A function may be passed instead of a propType.
 
 ```jsx
 import {element} from 'deku'
