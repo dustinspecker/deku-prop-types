@@ -4,7 +4,7 @@
 
 [![Code Climate](https://codeclimate.com/github/dustinspecker/deku-prop-types/badges/gpa.svg)](https://codeclimate.com/github/dustinspecker/deku-prop-types) [![Dependencies](https://david-dm.org/dustinspecker/deku-prop-types.svg)](https://david-dm.org/dustinspecker/deku-prop-types/#info=dependencies&view=table) [![DevDependencies](https://david-dm.org/dustinspecker/deku-prop-types/dev-status.svg)](https://david-dm.org/dustinspecker/deku-prop-types/#info=devDependencies&view=table)
 
-> Like [React PropTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation), but for [Deku](https://github.com/dekujs/deku)
+> Prop type validation for [Deku](https://github.com/dekujs/deku) components
 
 ## Install
 
