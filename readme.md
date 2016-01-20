@@ -49,6 +49,25 @@ export default validate(Counter)
 Validate prop is of any type (not undefined)
 ### propTypes.array
 Validate prop is an array
+
+### propTypes.arrayOf
+Validate prop is an array consisting of a type
+
+```jsx
+import {element} from 'deku'
+import {validate} from 'deku-prop-types'
+
+const NamesList = ({props}) => <div>
+  {props.names.map(name => <div>{name}</div>)}
+</div>
+
+NamesList.propTypes = {
+  names: propTypes.arrayOf(propTypes.string)
+}
+
+export default validate(NamesList)
+```
+
 ### propTypes.bool
 Validate prop is a boolean
 ### propTypes.func

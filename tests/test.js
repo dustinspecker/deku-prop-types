@@ -116,6 +116,22 @@ test('should validate string types', t => {
   t.is(types.sex.validate(props.sex, 'sex'), null)
 })
 
+test('should validate arrayOf', t => {
+  const types = {
+    names: propTypes.arrayOf(propTypes.string),
+    ages: propTypes.arrayOf(propTypes.number),
+    cities: propTypes.arrayOf(propTypes.string).isRequired
+  }
+
+  const props = {
+    names: ['abe', 'george', 'thomas']
+  }
+
+  t.is(types.names.validate(props.names, 'names'), null)
+  t.is(types.ages.validate(props.ages, 'ages'), null)
+  t.throws(() => types.cities.validate(props.cities, 'cities'), /cities is required/)
+})
+
 test('should validate props', t => {
   const types = {
     name: propTypes.string,

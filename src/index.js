@@ -1,4 +1,7 @@
 const checkerFactory = (name, validator) => ({
+  get name() {
+    return name
+  },
   get isRequired() {
     this.required = true
     return this
@@ -25,6 +28,13 @@ module.exports.propTypes = {
   },
   get array() {
     return checkerFactory('array', prop => Array.isArray(prop))
+  },
+  get arrayOf() {
+    return validator =>
+      checkerFactory('arrayOf', prop => {
+        prop.forEach(p => validator.validate(p))
+        return true
+      })
   },
   get bool() {
     return checkerFactory('bool', 'boolean')
