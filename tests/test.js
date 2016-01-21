@@ -165,6 +165,22 @@ test('should validate oneOf', t => {
   t.is(types.state.validate(props.state, 'state'), null)
 })
 
+test('should validate oneOfType', t => {
+  const types = {
+    color: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    age: propTypes.oneOfType([propTypes.string, propTypes.number])
+  }
+
+  const props = {
+    color: [],
+    age: 25
+  }
+
+  const colorError = types.color.validate(props.color, 'color')
+  t.is(colorError.message, 'color is not one of the allowed types')
+  t.is(types.age.validate(props.age, 'age'), null)
+})
+
 test('should validate props', t => {
   const types = {
     name: propTypes.string,

@@ -93,6 +93,22 @@ Color.propTypes = {
 export default validate(Color)
 ```
 
+### propTypes.oneOfType
+Validate prop is one of the allowed types
+
+```jsx
+import {element} from 'deku'
+import {propTypes, validate} from 'deku-prop-types'
+
+const Age = ({props}) => <div>{props.age}</div>
+
+Age.propTypes = {
+  age: propTypes.oneOfType([propTypes.number, propTypes.number])
+}
+
+export default validate(Age)
+```
+
 ### propTypes.string
 Validate prop is a string
 

@@ -68,6 +68,17 @@ module.exports.propTypes = {
         return null
       })
   },
+  get oneOfType() {
+    return allowedTypes =>
+      checkerFactory('oneOfType', (prop, key) => {
+        const isAllowed = !allowedTypes.every(type => type.validate(prop) instanceof Error)
+        if (!isAllowed) {
+          return new TypeError(`${key} is not one of the allowed types`)
+        }
+
+        return null
+      })
+  },
   get string() {
     return checkerFactory('string', 'string')
   }
