@@ -149,6 +149,22 @@ test('should validate arrayOf', t => {
   t.is(oceansError.message, 'oceans does not consist of the correct type')
 })
 
+test('should validate instanceOf', t => {
+  const types = {
+    error: propTypes.instanceOf(Error),
+    list: propTypes.instanceOf(Array)
+  }
+
+  const props = {
+    error: new Error('bad'),
+    list: 3
+  }
+
+  t.is(types.error.validate(props.error, 'error'), null)
+  const listError = types.list.validate(props.list, 'list')
+  t.is(listError.message, 'list is not an instance of `Array`')
+})
+
 test('should validate oneOf', t => {
   const types = {
     color: propTypes.oneOf(['blue', 'red', 'green']),

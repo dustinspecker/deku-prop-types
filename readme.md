@@ -72,6 +72,25 @@ export default validate(NamesList)
 Validate prop is a boolean
 ### propTypes.func
 Validate prop is a function
+
+### propTypes.instanceOf
+Validate prop is an instance of a function or class
+
+```jsx
+import {element} from 'deku'
+import {propTypes, validate} from 'deku-prop-types'
+
+const ItemList ({props}) => <div>
+  {props.list.map(item => <div>{item}</div>)}
+</div>
+
+ItemList.propTypes = {
+  list: propTypes.instanceOf(Array)
+}
+
+export default validate(ItemList)
+```
+
 ### propTypes.number
 Validate prop is a number
 ### propTypes.object

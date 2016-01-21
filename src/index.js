@@ -51,6 +51,16 @@ module.exports.propTypes = {
   get func() {
     return checkerFactory('func', 'function')
   },
+  get instanceOf() {
+    return constructor =>
+      checkerFactory('instanceOf', (prop, key) => {
+        if (!(prop instanceof constructor)) {
+          return new TypeError(`${key} is not an instance of \`${constructor.name}\``)
+        }
+
+        return null
+      })
+  },
   get number() {
     return checkerFactory('number', 'number')
   },
