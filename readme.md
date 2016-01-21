@@ -76,6 +76,23 @@ Validate prop is a function
 Validate prop is a number
 ### propTypes.object
 Validate prop is an object
+
+### propTypes.oneOf
+Validate prop is one of the allowed values
+
+```jsx
+import {element} from 'deku'
+import {propTypes, validate} from 'deku-prop-types'
+
+const Color = ({props}) => <div>{props.color}</div>
+
+Color.propTypes = {
+  color: propTypes.oneOf(['red', 'green', 'blue'])
+}
+
+export default validate(Color)
+```
+
 ### propTypes.string
 Validate prop is a string
 

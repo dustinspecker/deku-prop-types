@@ -149,6 +149,22 @@ test('should validate arrayOf', t => {
   t.is(oceansError.message, 'oceans does not consist of the correct type')
 })
 
+test('should validate oneOf', t => {
+  const types = {
+    color: propTypes.oneOf(['blue', 'red', 'green']),
+    state: propTypes.oneOf(['Alabama', 'Missouri', 'Utah'])
+  }
+
+  const props = {
+    color: 'yellow',
+    state: 'Missouri'
+  }
+
+  const colorError = types.color.validate(props.color, 'color')
+  t.is(colorError.message, 'color is not one of the allowed values')
+  t.is(types.state.validate(props.state, 'state'), null)
+})
+
 test('should validate props', t => {
   const types = {
     name: propTypes.string,
