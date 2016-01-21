@@ -55,7 +55,7 @@ Validate prop is an array consisting of a type
 
 ```jsx
 import {element} from 'deku'
-import {validate} from 'deku-prop-types'
+import {propTypes, validate} from 'deku-prop-types'
 
 const NamesList = ({props}) => <div>
   {props.names.map(name => <div>{name}</div>)}
