@@ -219,6 +219,34 @@ test('should validate oneOfType', t => {
   t.is(types.age.validate(props.age, 'age'), null)
 })
 
+test('should validate shape', t => {
+  const types = {
+    config: propTypes.shape({
+      name: propTypes.string,
+      age: propTypes.number
+    }),
+    options: propTypes.shape({
+      port: propTypes.number,
+      host: propTypes.string
+    })
+  }
+
+  const props = {
+    config: {
+      name: 'dustin',
+      age: 25
+    },
+    options: {
+      port: 8080,
+      host: 3
+    }
+  }
+
+  t.is(types.config.validate(props.config, 'config'), null)
+  const optionsError = types.options.validate(props.options, 'options')
+  t.is(optionsError.message, 'options does not have the correct value types')
+})
+
 test('should validate props', t => {
   const types = {
     name: propTypes.string,

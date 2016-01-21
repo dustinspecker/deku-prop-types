@@ -144,6 +144,25 @@ Age.propTypes = {
 export default validate(Age)
 ```
 
+### propTypes.shape
+Validate an object's properties are of a certain type
+
+```jsx
+import {element} from 'deku'
+import {propTypes, validate} from 'deku-prop-types'
+
+const ConfigDisplay = ({props}) => <div>{props.config.port + ' ' + props.config.host}</div>
+
+ConfigDisplay.propTypes = {
+  config: propTypes.shape({
+    host: propTypes.string,
+    port: propTypes.number
+  })
+}
+
+export default validate(ConfigDisplay)
+```
+
 ### propTypes.string
 Validate prop is a string
 

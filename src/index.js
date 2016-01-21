@@ -105,6 +105,19 @@ module.exports.propTypes = {
         return null
       })
   },
+  get shape() {
+    return propsObj =>
+      checkerFactory('shape', (prop, key) => {
+        const anyErrors = Object.keys(propsObj)
+          .some(validator => propsObj[validator].validate(prop[validator]) instanceof Error)
+
+        if (anyErrors) {
+          return new TypeError(`${key} does not have the correct value types`)
+        }
+
+        return null
+      })
+  },
   get string() {
     return checkerFactory('string', 'string')
   }
