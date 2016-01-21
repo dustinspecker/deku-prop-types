@@ -165,6 +165,28 @@ test('should validate instanceOf', t => {
   t.is(listError.message, 'list is not an instance of `Array`')
 })
 
+test('should validate objectOf', t => {
+  const types = {
+    ports: propTypes.objectOf(propTypes.number),
+    names: propTypes.objectOf(propTypes.string)
+  }
+
+  const props = {
+    ports: {
+      http: 80,
+      https: 443
+    },
+    names: {
+      first: 'dustin',
+      last: 3
+    }
+  }
+
+  t.is(types.ports.validate(props.ports, 'ports'), null)
+  const namesError = types.names.validate(props.names, 'names')
+  t.is(namesError.message, 'names does not consist of all properties with `string` values')
+})
+
 test('should validate oneOf', t => {
   const types = {
     color: propTypes.oneOf(['blue', 'red', 'green']),

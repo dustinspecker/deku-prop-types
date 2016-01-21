@@ -96,6 +96,22 @@ Validate prop is a number
 ### propTypes.object
 Validate prop is an object
 
+### propTypes.objectOf
+Validate prop has keys all matching an allowed type
+
+```jsx
+import {element} from 'deku'
+import {propTypes, validate} from 'deku-prop-types'
+
+const NameCard = ({props}) => <div>{props.person.firstName + ' ' + props.person.lastName}</div>
+
+NameCard.propTypes = {
+  person: propTypes.objectOf(propTypes.string)
+}
+
+export default validate(NameCard)
+```
+
 ### propTypes.oneOf
 Validate prop is one of the allowed values
 

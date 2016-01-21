@@ -1,4 +1,7 @@
 const checkerFactory = (name, validator) => ({
+  get name() {
+    return name
+  },
   get isRequired() {
     this.required = true
     return this
@@ -66,6 +69,19 @@ module.exports.propTypes = {
   },
   get object() {
     return checkerFactory('object', 'object')
+  },
+  get objectOf() {
+    return validator =>
+      checkerFactory('objectOf', (prop, key) => {
+        const anyErrors = Object.keys(prop)
+          .some(p => validator.validate(prop[p]) instanceof Error)
+
+        if (anyErrors) {
+          return new TypeError(`${key} does not consist of all properties with \`${validator.name}\` values`)
+        }
+
+        return null
+      })
   },
   get oneOf() {
     return allowedValues =>
