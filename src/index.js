@@ -5,13 +5,16 @@ const checkerFactory = (name, validator) => ({
   },
   validate(prop, key) {
     if (this.required && prop === undefined) {
-      throw new Error(`${key} is required`)
+      return new Error(`${key} is required`)
     }
 
     if (prop !== undefined) {
-      if (typeof validator === 'string' && typeof prop !== validator ||
-          typeof validator === 'function' && !validator(prop)) {
-        throw new TypeError(`${key} should be of type \`${name}\``)
+      if (typeof validator === 'string' && typeof prop !== validator) {
+        return new TypeError(`${key} should be of type \`${name}\``)
+      }
+
+      if (typeof validator === 'function') {
+        return validator(prop, key)
       }
     }
 
@@ -21,16 +24,25 @@ const checkerFactory = (name, validator) => ({
 
 module.exports.propTypes = {
   get any() {
-    return checkerFactory('any', prop => prop !== undefined)
+    return checkerFactory('any', () => null)
   },
   get array() {
-    return checkerFactory('array', prop => Array.isArray(prop))
+    return checkerFactory('array', (prop, key) => {
+      if (!Array.isArray(prop)) {
+        return new TypeError(`${key} should be of type \`array\``)
+      }
+      return null
+    })
   },
   get arrayOf() {
     return validator =>
-      checkerFactory('arrayOf', prop => {
-        prop.forEach(p => validator.validate(p))
-        return true
+      checkerFactory('arrayOf', (prop, key) => {
+        const anyErrors = prop.some(p => validator.validate(p) instanceof Error)
+        if (anyErrors) {
+          return new TypeError(`${key} does not consist of the correct type`)
+        }
+
+        return null
       })
   },
   get bool() {
@@ -52,11 +64,18 @@ module.exports.propTypes = {
 
 const validate = (propTypes, props) => {
   Object.keys(propTypes).forEach(key => {
+    let result
     if (typeof propTypes[key] === 'function') {
-      propTypes[key](props, key)
+      result = propTypes[key](props, key)
     } else {
-      propTypes[key].validate(props[key], key)
+      result = propTypes[key].validate(props[key], key)
     }
+
+    if (result instanceof Error) {
+      throw result
+    }
+
+    return null
   })
 }
 

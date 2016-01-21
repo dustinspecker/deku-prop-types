@@ -95,8 +95,10 @@ const Counter = ({props}) => <div>{props.count}</div>
 Counter.propTypes = {
   count(props, propName) {
     if (props[propName] < 10) {
-      throw new Error('count must be less than 10')
+      return new Error('count must be less than 10')
     }
+
+    return null
   }
 }
 

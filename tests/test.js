@@ -13,21 +13,27 @@ test('should validate any types', t => {
   }
 
   t.is(types.age.validate(props.age, 'age'), null)
-  t.throws(() => types.name.validate(props.name, 'name'), /name is required/)
+  const nameError = types.name.validate(props.name, 'name')
+  t.is(nameError.message, 'name is required')
 })
 
 test('should validate array types', t => {
   const types = {
     days: propTypes.array,
-    months: propTypes.array.isRequired
+    months: propTypes.array.isRequired,
+    ages: propTypes.array
   }
 
   const props = {
-    days: [1, 2, 3]
+    days: [1, 2, 3],
+    ages: 3
   }
 
   t.is(types.days.validate(props.days, 'days'), null)
-  t.throws(() => types.months.validate(props.months, 'months'), /months is required/)
+  const monthsError = types.months.validate(props.months, 'months')
+  t.is(monthsError.message, 'months is required')
+  const agesError = types.ages.validate(props.ages, 'ages')
+  t.is(agesError.message, 'ages should be of type `array`')
 })
 
 test('should validate boolean types', t => {
@@ -41,7 +47,8 @@ test('should validate boolean types', t => {
   }
 
   t.is(types.dead.validate(props.dead, 'dead'), null)
-  t.throws(() => types.green.validate(props.green, 'green'), /green is required/)
+  const greenError = types.green.validate(props.green, 'green')
+  t.is(greenError.message, 'green is required')
 })
 
 test('should validate function types', t => {
@@ -55,7 +62,8 @@ test('should validate function types', t => {
   }
 
   t.is(types.validator.validate(props.validator, 'validator'), null)
-  t.throws(() => types.encoder.validate(props.encoder, 'encoder'), /encoder is required/)
+  const encoderError = types.encoder.validate(props.encoder, 'encoder')
+  t.is(encoderError.message, 'encoder is required')
 })
 
 test('should validate number types', t => {
@@ -74,8 +82,10 @@ test('should validate number types', t => {
   }
 
   t.is(types.age.validate(props.age, 'age'), null)
-  t.throws(() => types.year.validate(props.year, 'year'), /year should be of type `number`/)
-  t.throws(() => types.day.validate(props.day, 'day'), /day is required/)
+  const yearError = types.year.validate(props.year, 'year')
+  t.is(yearError.message, 'year should be of type `number`')
+  const dayError = types.day.validate(props.day, 'day')
+  t.is(dayError.message, 'day is required')
   t.is(types.week.validate(props.week, 'week'), null)
   t.is(types.month.validate(props.month, 'month'), null)
 })
@@ -91,7 +101,8 @@ test('should validate object types', t => {
   }
 
   t.is(types.model.validate(props.model, 'model'), null)
-  t.throws(() => types.config.validate(props.config, 'config'), /config is required/)
+  const configError = types.config.validate(props.config, 'config')
+  t.is(configError.message, 'config is required')
 })
 
 test('should validate string types', t => {
@@ -110,8 +121,9 @@ test('should validate string types', t => {
   }
 
   t.is(types.name.validate(props.name, 'name'), null)
-  t.throws(() => types.city.validate(props.city, 'city'), /city should be of type `string`/)
-  t.throws(() => types.state.validate(props.state, 'state'), /state is required/)
+  const cityError = types.city.validate(props.city, 'city')
+  t.ok(cityError instanceof Error)
+  t.is(cityError.message, 'city should be of type `string`')
   t.is(types.county.validate(props.county, 'county'), null)
   t.is(types.sex.validate(props.sex, 'sex'), null)
 })
@@ -120,16 +132,21 @@ test('should validate arrayOf', t => {
   const types = {
     names: propTypes.arrayOf(propTypes.string),
     ages: propTypes.arrayOf(propTypes.number),
-    cities: propTypes.arrayOf(propTypes.string).isRequired
+    cities: propTypes.arrayOf(propTypes.string).isRequired,
+    oceans: propTypes.arrayOf(propTypes.string)
   }
 
   const props = {
-    names: ['abe', 'george', 'thomas']
+    names: ['abe', 'george', 'thomas'],
+    oceans: [1, 2, 3]
   }
 
   t.is(types.names.validate(props.names, 'names'), null)
   t.is(types.ages.validate(props.ages, 'ages'), null)
-  t.throws(() => types.cities.validate(props.cities, 'cities'), /cities is required/)
+  const citiesError = types.cities.validate(props.cities, 'cities')
+  t.is(citiesError.message, 'cities is required')
+  const oceansError = types.oceans.validate(props.oceans, 'oceans')
+  t.is(oceansError.message, 'oceans does not consist of the correct type')
 })
 
 test('should validate props', t => {
@@ -163,7 +180,7 @@ test('should validate props with custom validators', t => {
   const types = {
     name(props, propName) {
       if (props[propName].length !== 3) {
-        throw new Error('name is invalid')
+        return new Error('name is invalid')
       }
     }
   }
