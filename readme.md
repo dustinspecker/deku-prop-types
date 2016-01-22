@@ -14,6 +14,8 @@ npm install --save deku-prop-types
 
 ## Usage
 
+**Note: propType validations are not performed in production environments**
+
 `function-component.jsx`
 ```jsx
 import {element} from 'deku'

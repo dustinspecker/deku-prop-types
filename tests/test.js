@@ -295,3 +295,18 @@ test('should validate props with custom validators', t => {
   props.name = 'hii'
   t.same(validate(component)({props}), {props})
 })
+
+test('should not perform validation when production env', t => {
+  /* eslint-disable no-process-env */
+  process.env.NODE_ENV = 'production'
+  const props = {
+    name: 3
+  }
+
+  const component = model => model
+  component.propTypes = {
+    name: propTypes.string
+  }
+
+  t.doesNotThrow(() => validate(component)({props}))
+})

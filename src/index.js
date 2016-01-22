@@ -141,6 +141,11 @@ const validate = (propTypes, props) => {
 }
 
 module.exports.validate = component => {
+  /* eslint-disable no-process-env */
+  if (process.env.NODE_ENV === 'production') {
+    return component
+  }
+
   if (typeof component === 'function') {
     return model => {
       validate(component.propTypes, model.props)
