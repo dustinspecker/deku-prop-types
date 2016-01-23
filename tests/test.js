@@ -258,6 +258,42 @@ test('should validate shape', t => {
   t.is(optionsError.message, 'Expected options.host to be of type `string`, but got `number`')
 })
 
+test('should validate deep props', t => {
+  const types = {
+    person: propTypes.shape({
+      name: propTypes.shape({
+        first: propTypes.string,
+        last: propTypes.string
+      })
+    }),
+    options: propTypes.shape({
+      path: propTypes.shape({
+        host: propTypes.string.isRequired,
+        port: propTypes.number
+      })
+    })
+  }
+
+  const props = {
+    person: {
+      name: {
+        first: 'dustin',
+        last: 25
+      }
+    },
+    options: {
+      path: {
+        port: 80
+      }
+    }
+  }
+
+  const personNameError = types.person.validate(props.person, 'person')
+  t.is(personNameError.message, 'Expected person.name.last to be of type `string`, but got `number`')
+  const optionsPathError = types.options.validate(props.options, 'options')
+  t.is(optionsPathError.message, 'options.path.host is required')
+})
+
 test('should validate props', t => {
   const types = {
     name: propTypes.string,
