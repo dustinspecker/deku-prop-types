@@ -1,7 +1,4 @@
 const checkerFactory = (name, validator) => ({
-  get name() {
-    return name
-  },
   get isRequired() {
     this.required = true
     return this
