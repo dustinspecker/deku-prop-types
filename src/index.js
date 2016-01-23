@@ -76,11 +76,17 @@ module.exports.propTypes = {
   get objectOf() {
     return validator =>
       checkerFactory('objectOf', (prop, key) => {
-        const anyErrors = Object.keys(prop)
-          .some(p => validator.validate(prop[p]) instanceof Error)
+        const propKeys = Object.keys(prop)
 
-        if (anyErrors) {
-          return new TypeError(`${key} does not consist of all properties with \`${validator.name}\` values`)
+        for (let i = 0; i < propKeys.length; i++) {
+          const validatorResult = validator.validate(
+            prop[propKeys[i]],
+            `${key}.${propKeys[i]}`
+          )
+
+          if (validatorResult instanceof Error) {
+            return validatorResult
+          }
         }
 
         return null

@@ -188,7 +188,7 @@ test('should validate objectOf', t => {
 
   t.is(types.ports.validate(props.ports, 'ports'), null)
   const namesError = types.names.validate(props.names, 'names')
-  t.is(namesError.message, 'names does not consist of all properties with `string` values')
+  t.is(namesError.message, 'names.last should be of type `string`')
 })
 
 test('should validate oneOf', t => {
