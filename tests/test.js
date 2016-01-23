@@ -133,12 +133,14 @@ test('should validate arrayOf', t => {
     names: propTypes.arrayOf(propTypes.string),
     ages: propTypes.arrayOf(propTypes.number),
     cities: propTypes.arrayOf(propTypes.string).isRequired,
-    oceans: propTypes.arrayOf(propTypes.string)
+    oceans: propTypes.arrayOf(propTypes.string),
+    states: propTypes.arrayOf(propTypes.string)
   }
 
   const props = {
     names: ['abe', 'george', 'thomas'],
-    oceans: [1, 2, 3]
+    oceans: [1, 2, 3],
+    states: 'Missouri'
   }
 
   t.is(types.names.validate(props.names, 'names'), null)
@@ -147,6 +149,8 @@ test('should validate arrayOf', t => {
   t.is(citiesError.message, 'cities is required')
   const oceansError = types.oceans.validate(props.oceans, 'oceans')
   t.is(oceansError.message, 'oceans does not consist of the correct type')
+  const statesError = types.states.validate(props.states, 'states')
+  t.is(statesError.message, 'states is not an `Array`')
 })
 
 test('should validate instanceOf', t => {

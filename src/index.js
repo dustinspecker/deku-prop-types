@@ -40,6 +40,9 @@ module.exports.propTypes = {
   get arrayOf() {
     return validator =>
       checkerFactory('arrayOf', (prop, key) => {
+        if (!Array.isArray(prop)) {
+          return new TypeError(`${key} is not an \`Array\``)
+        }
         const anyErrors = prop.some(p => validator.validate(p) instanceof Error)
         if (anyErrors) {
           return new TypeError(`${key} does not consist of the correct type`)
