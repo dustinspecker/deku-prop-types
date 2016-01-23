@@ -83,7 +83,7 @@ test('should validate number types', t => {
 
   t.is(types.age.validate(props.age, 'age'), null)
   const yearError = types.year.validate(props.year, 'year')
-  t.is(yearError.message, 'year should be of type `number`')
+  t.is(yearError.message, 'Expected year to be of type `number`, but got `string`')
   const dayError = types.day.validate(props.day, 'day')
   t.is(dayError.message, 'day is required')
   t.is(types.week.validate(props.week, 'week'), null)
@@ -123,7 +123,7 @@ test('should validate string types', t => {
   t.is(types.name.validate(props.name, 'name'), null)
   const cityError = types.city.validate(props.city, 'city')
   t.ok(cityError instanceof Error)
-  t.is(cityError.message, 'city should be of type `string`')
+  t.is(cityError.message, 'Expected city to be of type `string`, but got `number`')
   t.is(types.county.validate(props.county, 'county'), null)
   t.is(types.sex.validate(props.sex, 'sex'), null)
 })
@@ -188,7 +188,7 @@ test('should validate objectOf', t => {
 
   t.is(types.ports.validate(props.ports, 'ports'), null)
   const namesError = types.names.validate(props.names, 'names')
-  t.is(namesError.message, 'names.last should be of type `string`')
+  t.is(namesError.message, 'Expected names.last to be of type `string`, but got `number`')
 })
 
 test('should validate oneOf', t => {
@@ -248,7 +248,7 @@ test('should validate shape', t => {
 
   t.is(types.config.validate(props.config, 'config'), null)
   const optionsError = types.options.validate(props.options, 'options')
-  t.is(optionsError.message, 'options.host should be of type `string`')
+  t.is(optionsError.message, 'Expected options.host to be of type `string`, but got `number`')
 })
 
 test('should validate props', t => {

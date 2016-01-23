@@ -10,7 +10,8 @@ const checkerFactory = (name, validator) => ({
 
     if (prop !== undefined) {
       if (typeof validator === 'string' && typeof prop !== validator) {
-        return new TypeError(`${key} should be of type \`${name}\``)
+        const actualType = typeof prop
+        return new TypeError(`Expected ${key} to be of type \`${name}\`, but got \`${actualType}\``)
       }
 
       if (typeof validator === 'function') {
