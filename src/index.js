@@ -111,11 +111,17 @@ module.exports.propTypes = {
   get shape() {
     return propsObj =>
       checkerFactory('shape', (prop, key) => {
-        const anyErrors = Object.keys(propsObj)
-          .some(validator => propsObj[validator].validate(prop[validator]) instanceof Error)
+        const validators = Object.keys(propsObj)
 
-        if (anyErrors) {
-          return new TypeError(`${key} does not have the correct value types`)
+        for (let i = 0; i < validators.length; i++) {
+          const validatorResult = propsObj[validators[i]].validate(
+            prop[validators[i]],
+            `${key}.${validators[i]}`
+          )
+
+          if (validatorResult instanceof Error) {
+            return validatorResult
+          }
         }
 
         return null

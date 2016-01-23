@@ -248,7 +248,7 @@ test('should validate shape', t => {
 
   t.is(types.config.validate(props.config, 'config'), null)
   const optionsError = types.options.validate(props.options, 'options')
-  t.is(optionsError.message, 'options does not have the correct value types')
+  t.is(optionsError.message, 'options.host should be of type `string`')
 })
 
 test('should validate props', t => {
