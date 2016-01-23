@@ -39,16 +39,20 @@ test('should validate array types', t => {
 test('should validate boolean types', t => {
   const types = {
     dead: propTypes.bool,
-    green: propTypes.bool.isRequired
+    green: propTypes.bool.isRequired,
+    age: propTypes.bool
   }
 
   const props = {
-    dead: false
+    dead: false,
+    age: 25
   }
 
   t.is(types.dead.validate(props.dead, 'dead'), undefined)
   const greenError = types.green.validate(props.green, 'green')
   t.is(greenError.message, 'green is required')
+  const ageError = types.age.validate(props.age, 'age')
+  t.is(ageError.message, 'Expected age to be of type `boolean`, but got `number`')
 })
 
 test('should validate function types', t => {
