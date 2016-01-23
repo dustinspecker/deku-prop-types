@@ -186,8 +186,6 @@ Counter.propTypes = {
     if (props[propName] < 10) {
       return new Error('count must be less than 10')
     }
-
-    return null
   }
 }
 

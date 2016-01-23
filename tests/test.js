@@ -12,7 +12,7 @@ test('should validate any types', t => {
     age: 75
   }
 
-  t.is(types.age.validate(props.age, 'age'), null)
+  t.is(types.age.validate(props.age, 'age'), undefined)
   const nameError = types.name.validate(props.name, 'name')
   t.is(nameError.message, 'name is required')
 })
@@ -29,7 +29,7 @@ test('should validate array types', t => {
     ages: 3
   }
 
-  t.is(types.days.validate(props.days, 'days'), null)
+  t.is(types.days.validate(props.days, 'days'), undefined)
   const monthsError = types.months.validate(props.months, 'months')
   t.is(monthsError.message, 'months is required')
   const agesError = types.ages.validate(props.ages, 'ages')
@@ -46,7 +46,7 @@ test('should validate boolean types', t => {
     dead: false
   }
 
-  t.is(types.dead.validate(props.dead, 'dead'), null)
+  t.is(types.dead.validate(props.dead, 'dead'), undefined)
   const greenError = types.green.validate(props.green, 'green')
   t.is(greenError.message, 'green is required')
 })
@@ -61,7 +61,7 @@ test('should validate function types', t => {
     validator: () => 'hi'
   }
 
-  t.is(types.validator.validate(props.validator, 'validator'), null)
+  t.is(types.validator.validate(props.validator, 'validator'), undefined)
   const encoderError = types.encoder.validate(props.encoder, 'encoder')
   t.is(encoderError.message, 'encoder is required')
 })
@@ -81,13 +81,13 @@ test('should validate number types', t => {
     week: 52
   }
 
-  t.is(types.age.validate(props.age, 'age'), null)
+  t.is(types.age.validate(props.age, 'age'), undefined)
   const yearError = types.year.validate(props.year, 'year')
   t.is(yearError.message, 'Expected year to be of type `number`, but got `string`')
   const dayError = types.day.validate(props.day, 'day')
   t.is(dayError.message, 'day is required')
-  t.is(types.week.validate(props.week, 'week'), null)
-  t.is(types.month.validate(props.month, 'month'), null)
+  t.is(types.week.validate(props.week, 'week'), undefined)
+  t.is(types.month.validate(props.month, 'month'), undefined)
 })
 
 test('should validate object types', t => {
@@ -100,7 +100,7 @@ test('should validate object types', t => {
     model: {}
   }
 
-  t.is(types.model.validate(props.model, 'model'), null)
+  t.is(types.model.validate(props.model, 'model'), undefined)
   const configError = types.config.validate(props.config, 'config')
   t.is(configError.message, 'config is required')
 })
@@ -120,12 +120,12 @@ test('should validate string types', t => {
     county: 'ocean'
   }
 
-  t.is(types.name.validate(props.name, 'name'), null)
+  t.is(types.name.validate(props.name, 'name'), undefined)
   const cityError = types.city.validate(props.city, 'city')
   t.ok(cityError instanceof Error)
   t.is(cityError.message, 'Expected city to be of type `string`, but got `number`')
-  t.is(types.county.validate(props.county, 'county'), null)
-  t.is(types.sex.validate(props.sex, 'sex'), null)
+  t.is(types.county.validate(props.county, 'county'), undefined)
+  t.is(types.sex.validate(props.sex, 'sex'), undefined)
 })
 
 test('should validate arrayOf', t => {
@@ -143,8 +143,8 @@ test('should validate arrayOf', t => {
     states: 'Missouri'
   }
 
-  t.is(types.names.validate(props.names, 'names'), null)
-  t.is(types.ages.validate(props.ages, 'ages'), null)
+  t.is(types.names.validate(props.names, 'names'), undefined)
+  t.is(types.ages.validate(props.ages, 'ages'), undefined)
   const citiesError = types.cities.validate(props.cities, 'cities')
   t.is(citiesError.message, 'cities is required')
   const oceansError = types.oceans.validate(props.oceans, 'oceans')
@@ -164,7 +164,7 @@ test('should validate instanceOf', t => {
     list: 3
   }
 
-  t.is(types.error.validate(props.error, 'error'), null)
+  t.is(types.error.validate(props.error, 'error'), undefined)
   const listError = types.list.validate(props.list, 'list')
   t.is(listError.message, 'list is not an instance of `Array`')
 })
@@ -186,7 +186,7 @@ test('should validate objectOf', t => {
     }
   }
 
-  t.is(types.ports.validate(props.ports, 'ports'), null)
+  t.is(types.ports.validate(props.ports, 'ports'), undefined)
   const namesError = types.names.validate(props.names, 'names')
   t.is(namesError.message, 'Expected names.last to be of type `string`, but got `number`')
 })
@@ -204,7 +204,7 @@ test('should validate oneOf', t => {
 
   const colorError = types.color.validate(props.color, 'color')
   t.is(colorError.message, 'color is not one of the allowed values')
-  t.is(types.state.validate(props.state, 'state'), null)
+  t.is(types.state.validate(props.state, 'state'), undefined)
 })
 
 test('should validate oneOfType', t => {
@@ -220,7 +220,7 @@ test('should validate oneOfType', t => {
 
   const colorError = types.color.validate(props.color, 'color')
   t.is(colorError.message, 'color is not one of the allowed types')
-  t.is(types.age.validate(props.age, 'age'), null)
+  t.is(types.age.validate(props.age, 'age'), undefined)
 })
 
 test('should validate shape', t => {
@@ -246,7 +246,7 @@ test('should validate shape', t => {
     }
   }
 
-  t.is(types.config.validate(props.config, 'config'), null)
+  t.is(types.config.validate(props.config, 'config'), undefined)
   const optionsError = types.options.validate(props.options, 'options')
   t.is(optionsError.message, 'Expected options.host to be of type `string`, but got `number`')
 })

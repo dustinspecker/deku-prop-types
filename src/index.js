@@ -18,14 +18,12 @@ const checkerFactory = (name, validator) => ({
         return validator(prop, key)
       }
     }
-
-    return null
   }
 })
 
 module.exports.propTypes = {
   get any() {
-    return checkerFactory('any', () => null)
+    return checkerFactory('any')
   },
   get array() {
     return checkerFactory('array', (prop, key) => {
@@ -33,7 +31,6 @@ module.exports.propTypes = {
         const actualType = typeof prop
         return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
       }
-      return null
     })
   },
   get arrayOf() {
@@ -47,8 +44,6 @@ module.exports.propTypes = {
         if (anyErrors) {
           return new TypeError(`${key} does not consist of the correct type`)
         }
-
-        return null
       })
   },
   get bool() {
@@ -63,8 +58,6 @@ module.exports.propTypes = {
         if (!(prop instanceof constructor)) {
           return new TypeError(`${key} is not an instance of \`${constructor.name}\``)
         }
-
-        return null
       })
   },
   get number() {
@@ -88,8 +81,6 @@ module.exports.propTypes = {
             return validatorResult
           }
         }
-
-        return null
       })
   },
   get oneOf() {
@@ -99,8 +90,6 @@ module.exports.propTypes = {
         if (!isAllowed) {
           return new TypeError(`${key} is not one of the allowed values`)
         }
-
-        return null
       })
   },
   get oneOfType() {
@@ -110,8 +99,6 @@ module.exports.propTypes = {
         if (!isAllowed) {
           return new TypeError(`${key} is not one of the allowed types`)
         }
-
-        return null
       })
   },
   get shape() {
@@ -129,8 +116,6 @@ module.exports.propTypes = {
             return validatorResult
           }
         }
-
-        return null
       })
   },
   get string() {
@@ -150,8 +135,6 @@ const validate = (propTypes, props) => {
     if (result instanceof Error) {
       throw result
     }
-
-    return null
   })
 }
 
