@@ -30,7 +30,8 @@ module.exports.propTypes = {
   get array() {
     return checkerFactory('array', (prop, key) => {
       if (!Array.isArray(prop)) {
-        return new TypeError(`${key} should be of type \`array\``)
+        const actualType = typeof prop
+        return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
       }
       return null
     })
@@ -39,7 +40,8 @@ module.exports.propTypes = {
     return validator =>
       checkerFactory('arrayOf', (prop, key) => {
         if (!Array.isArray(prop)) {
-          return new TypeError(`${key} is not an \`Array\``)
+          const actualType = typeof prop
+          return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
         }
         const anyErrors = prop.some(p => validator.validate(p) instanceof Error)
         if (anyErrors) {

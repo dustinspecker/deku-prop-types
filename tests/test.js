@@ -33,7 +33,7 @@ test('should validate array types', t => {
   const monthsError = types.months.validate(props.months, 'months')
   t.is(monthsError.message, 'months is required')
   const agesError = types.ages.validate(props.ages, 'ages')
-  t.is(agesError.message, 'ages should be of type `array`')
+  t.is(agesError.message, 'Expected ages to be an `Array`, but got `number`')
 })
 
 test('should validate boolean types', t => {
@@ -150,7 +150,7 @@ test('should validate arrayOf', t => {
   const oceansError = types.oceans.validate(props.oceans, 'oceans')
   t.is(oceansError.message, 'oceans does not consist of the correct type')
   const statesError = types.states.validate(props.states, 'states')
-  t.is(statesError.message, 'states is not an `Array`')
+  t.is(statesError.message, 'Expected states to be an `Array`, but got `string`')
 })
 
 test('should validate instanceOf', t => {
