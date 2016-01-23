@@ -161,12 +161,12 @@ test('should validate instanceOf', t => {
 
   const props = {
     error: new Error('bad'),
-    list: 3
+    list: {}
   }
 
   t.is(types.error.validate(props.error, 'error'), undefined)
   const listError = types.list.validate(props.list, 'list')
-  t.is(listError.message, 'list is not an instance of `Array`')
+  t.is(listError.message, 'Expected list to be an instance of `Array`, but got `Object`')
 })
 
 test('should validate objectOf', t => {
