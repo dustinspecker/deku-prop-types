@@ -57,7 +57,7 @@ module.exports.propTypes = {
       checkerFactory('instanceOf', (prop, key) => {
         if (!(prop instanceof constructor)) {
           /* eslint-disable prefer-reflect */
-          const actualConstructorName = Object.getPrototypeOf(prop).constructor.name
+          const actualConstructorName = prop === null ? prop : Object.getPrototypeOf(prop).constructor.name
           const errorMsg = `Expected ${key} to be an instance of \`${constructor.name}\`, ` +
             `but got \`${actualConstructorName}\``
           return new TypeError(errorMsg)

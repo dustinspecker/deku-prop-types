@@ -156,17 +156,24 @@ test('should validate arrayOf', t => {
 test('should validate instanceOf', t => {
   const types = {
     error: propTypes.instanceOf(Error),
-    list: propTypes.instanceOf(Array)
+    list: propTypes.instanceOf(Array),
+    name: propTypes.instanceOf(String),
+    dog: propTypes.instanceOf(Object)
   }
 
   const props = {
     error: new Error('bad'),
-    list: {}
+    list: {},
+    name: null,
+    dog: undefined
   }
 
   t.is(types.error.validate(props.error, 'error'), undefined)
   const listError = types.list.validate(props.list, 'list')
   t.is(listError.message, 'Expected list to be an instance of `Array`, but got `Object`')
+  const nameError = types.name.validate(props.name, 'name')
+  t.is(nameError.message, 'Expected name to be an instance of `String`, but got `null`')
+  t.is(types.dog.validate(props.dog, 'dog'), undefined)
 })
 
 test('should validate objectOf', t => {
