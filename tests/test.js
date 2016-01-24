@@ -1,11 +1,11 @@
 import test from 'ava'
 
-import {propTypes, validate} from '../lib'
+import {PropTypes, validate} from '../lib'
 
 test('should validate any types', t => {
   const types = {
-    age: propTypes.any,
-    name: propTypes.any.isRequired
+    age: PropTypes.any,
+    name: PropTypes.any.isRequired
   }
 
   const props = {
@@ -20,9 +20,9 @@ test('should validate any types', t => {
 
 test('should validate array types', t => {
   const types = {
-    days: propTypes.array,
-    months: propTypes.array.isRequired,
-    ages: propTypes.array
+    days: PropTypes.array,
+    months: PropTypes.array.isRequired,
+    ages: PropTypes.array
   }
 
   const props = {
@@ -41,9 +41,9 @@ test('should validate array types', t => {
 
 test('should validate boolean types', t => {
   const types = {
-    dead: propTypes.bool,
-    green: propTypes.bool.isRequired,
-    age: propTypes.bool
+    dead: PropTypes.bool,
+    green: PropTypes.bool.isRequired,
+    age: PropTypes.bool
   }
 
   const props = {
@@ -62,8 +62,8 @@ test('should validate boolean types', t => {
 
 test('should validate function types', t => {
   const types = {
-    validator: propTypes.func,
-    encoder: propTypes.func.isRequired
+    validator: PropTypes.func,
+    encoder: PropTypes.func.isRequired
   }
 
   const props = {
@@ -78,11 +78,11 @@ test('should validate function types', t => {
 
 test('should validate number types', t => {
   const types = {
-    age: propTypes.number,
-    year: propTypes.number,
-    day: propTypes.number.isRequired,
-    week: propTypes.number.isRequired,
-    month: propTypes.number
+    age: PropTypes.number,
+    year: PropTypes.number,
+    day: PropTypes.number.isRequired,
+    week: PropTypes.number.isRequired,
+    month: PropTypes.number
   }
 
   const props = {
@@ -104,8 +104,8 @@ test('should validate number types', t => {
 
 test('should validate object types', t => {
   const types = {
-    model: propTypes.object,
-    config: propTypes.object.isRequired
+    model: PropTypes.object,
+    config: PropTypes.object.isRequired
   }
 
   const props = {
@@ -120,11 +120,11 @@ test('should validate object types', t => {
 
 test('should validate string types', t => {
   const types = {
-    name: propTypes.string,
-    city: propTypes.string,
-    state: propTypes.string.isRequired,
-    county: propTypes.string.isRequired,
-    sex: propTypes.string
+    name: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string.isRequired,
+    county: PropTypes.string.isRequired,
+    sex: PropTypes.string
   }
 
   const props = {
@@ -143,11 +143,11 @@ test('should validate string types', t => {
 
 test('should validate arrayOf', t => {
   const types = {
-    names: propTypes.arrayOf(propTypes.string),
-    ages: propTypes.arrayOf(propTypes.number),
-    cities: propTypes.arrayOf(propTypes.string).isRequired,
-    oceans: propTypes.arrayOf(propTypes.string),
-    states: propTypes.arrayOf(propTypes.string)
+    names: PropTypes.arrayOf(PropTypes.string),
+    ages: PropTypes.arrayOf(PropTypes.number),
+    cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    oceans: PropTypes.arrayOf(PropTypes.string),
+    states: PropTypes.arrayOf(PropTypes.string)
   }
 
   const props = {
@@ -171,10 +171,10 @@ test('should validate arrayOf', t => {
 
 test('should validate instanceOf', t => {
   const types = {
-    error: propTypes.instanceOf(Error),
-    list: propTypes.instanceOf(Array),
-    name: propTypes.instanceOf(String),
-    dog: propTypes.instanceOf(Object)
+    error: PropTypes.instanceOf(Error),
+    list: PropTypes.instanceOf(Array),
+    name: PropTypes.instanceOf(String),
+    dog: PropTypes.instanceOf(Object)
   }
 
   const props = {
@@ -196,8 +196,8 @@ test('should validate instanceOf', t => {
 
 test('should validate objectOf', t => {
   const types = {
-    ports: propTypes.objectOf(propTypes.number),
-    names: propTypes.objectOf(propTypes.string)
+    ports: PropTypes.objectOf(PropTypes.number),
+    names: PropTypes.objectOf(PropTypes.string)
   }
 
   const props = {
@@ -219,8 +219,8 @@ test('should validate objectOf', t => {
 
 test('should validate oneOf', t => {
   const types = {
-    color: propTypes.oneOf(['blue', 'red', 'green']),
-    state: propTypes.oneOf(['Alabama', 'Missouri', 'Utah'])
+    color: PropTypes.oneOf(['blue', 'red', 'green']),
+    state: PropTypes.oneOf(['Alabama', 'Missouri', 'Utah'])
   }
 
   const props = {
@@ -236,8 +236,8 @@ test('should validate oneOf', t => {
 
 test('should validate oneOfType', t => {
   const types = {
-    color: propTypes.oneOfType([propTypes.string, propTypes.number]),
-    age: propTypes.oneOfType([propTypes.string, propTypes.number])
+    color: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    age: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   const props = {
@@ -253,13 +253,13 @@ test('should validate oneOfType', t => {
 
 test('should validate shape', t => {
   const types = {
-    config: propTypes.shape({
-      name: propTypes.string,
-      age: propTypes.number
+    config: PropTypes.shape({
+      name: PropTypes.string,
+      age: PropTypes.number
     }),
-    options: propTypes.shape({
-      port: propTypes.number,
-      host: propTypes.string
+    options: PropTypes.shape({
+      port: PropTypes.number,
+      host: PropTypes.string
     })
   }
 
@@ -282,16 +282,16 @@ test('should validate shape', t => {
 
 test('should validate deep props', t => {
   const types = {
-    person: propTypes.shape({
-      name: propTypes.shape({
-        first: propTypes.string,
-        last: propTypes.string
+    person: PropTypes.shape({
+      name: PropTypes.shape({
+        first: PropTypes.string,
+        last: PropTypes.string
       })
     }),
-    options: propTypes.shape({
-      path: propTypes.shape({
-        host: propTypes.string.isRequired,
-        port: propTypes.number
+    options: PropTypes.shape({
+      path: PropTypes.shape({
+        host: PropTypes.string.isRequired,
+        port: PropTypes.number
       })
     })
   }
@@ -320,8 +320,8 @@ test('should validate deep props', t => {
 
 test('should validate props', t => {
   const types = {
-    name: propTypes.string,
-    county: propTypes.number.isRequired
+    name: PropTypes.string,
+    county: PropTypes.number.isRequired
   }
 
   const props = {
@@ -340,7 +340,7 @@ test('should validate props', t => {
   t.throws(() => validate(objComponent).render({props}), /county is required/)
   t.is(objComponent.other(), 3)
 
-  types.county = propTypes.number
+  types.county = PropTypes.number
   t.same(validate(component)({props}), {props})
   t.same(validate(objComponent).render({props}), {props})
 })
@@ -376,7 +376,7 @@ test('should not perform validation when production env', t => {
 
   const component = model => model
   component.propTypes = {
-    name: propTypes.string
+    name: PropTypes.string
   }
 
   t.doesNotThrow(() => validate(component)({props}))

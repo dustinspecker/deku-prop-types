@@ -19,11 +19,11 @@ npm install --save deku-prop-types
 `function-component.jsx`
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const Counter = ({props}) => <div>{props.count}</div>
 Count.propTypes = {
-  count: propTypes.number.isRequired
+  count: PropTypes.number.isRequired
 }
 
 export default validate(Counter)
@@ -32,11 +32,11 @@ export default validate(Counter)
 `object-component.jsx`
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const Counter = {
   propTypes: {
-    count: propTypes.number.isRequired
+    count: PropTypes.number.isRequired
   },
   render({props}) {
     return <div>{props.count}</div>
@@ -47,131 +47,131 @@ export default validate(Counter)
 ```
 
 ## Supported types
-### propTypes.any
+### PropTypes.any
 Validate prop is of any type (not undefined)
-### propTypes.array
+### PropTypes.array
 Validate prop is an array
 
-### propTypes.arrayOf
+### PropTypes.arrayOf
 Validate prop is an array consisting of a type
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const NamesList = ({props}) => <div>
   {props.names.map(name => <div>{name}</div>)}
 </div>
 
 NamesList.propTypes = {
-  names: propTypes.arrayOf(propTypes.string)
+  names: PropTypes.arrayOf(PropTypes.string)
 }
 
 export default validate(NamesList)
 ```
 
-### propTypes.bool
+### PropTypes.bool
 Validate prop is a boolean
-### propTypes.func
+### PropTypes.func
 Validate prop is a function
 
-### propTypes.instanceOf
+### PropTypes.instanceOf
 Validate prop is an instance of a function or class
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const ItemList ({props}) => <div>
   {props.list.map(item => <div>{item}</div>)}
 </div>
 
 ItemList.propTypes = {
-  list: propTypes.instanceOf(Array)
+  list: PropTypes.instanceOf(Array)
 }
 
 export default validate(ItemList)
 ```
 
-### propTypes.number
+### PropTypes.number
 Validate prop is a number
-### propTypes.object
+### PropTypes.object
 Validate prop is an object
 
-### propTypes.objectOf
+### PropTypes.objectOf
 Validate prop has keys all matching an allowed type
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const NameCard = ({props}) => <div>{props.person.firstName + ' ' + props.person.lastName}</div>
 
 NameCard.propTypes = {
-  person: propTypes.objectOf(propTypes.string)
+  person: PropTypes.objectOf(PropTypes.string)
 }
 
 export default validate(NameCard)
 ```
 
-### propTypes.oneOf
+### PropTypes.oneOf
 Validate prop is one of the allowed values
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const Color = ({props}) => <div>{props.color}</div>
 
 Color.propTypes = {
-  color: propTypes.oneOf(['red', 'green', 'blue'])
+  color: PropTypes.oneOf(['red', 'green', 'blue'])
 }
 
 export default validate(Color)
 ```
 
-### propTypes.oneOfType
+### PropTypes.oneOfType
 Validate prop is one of the allowed types
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const Age = ({props}) => <div>{props.age}</div>
 
 Age.propTypes = {
-  age: propTypes.oneOfType([propTypes.number, propTypes.number])
+  age: PropTypes.oneOfType([PropTypes.number, PropTypes.number])
 }
 
 export default validate(Age)
 ```
 
-### propTypes.shape
+### PropTypes.shape
 Validate an object's properties are of a certain type
 
 ```jsx
 import {element} from 'deku'
-import {propTypes, validate} from 'deku-prop-types'
+import {PropTypes, validate} from 'deku-prop-types'
 
 const ConfigDisplay = ({props}) => <div>{props.config.port + ' ' + props.config.host}</div>
 
 ConfigDisplay.propTypes = {
-  config: propTypes.shape({
-    host: propTypes.string,
-    port: propTypes.number
+  config: PropTypes.shape({
+    host: PropTypes.string,
+    port: PropTypes.number
   })
 }
 
 export default validate(ConfigDisplay)
 ```
 
-### propTypes.string
+### PropTypes.string
 Validate prop is a string
 
 
-***Note: all propTypes can be required by specifying `isRequired` like below:***
+***Note: all PropTypes can be required by specifying `isRequired` like below:***
 
-`propTypes.number.isRequired`
+`PropTypes.number.isRequired`
 
 ## Custom Validators
 A function may be passed instead of a propType.

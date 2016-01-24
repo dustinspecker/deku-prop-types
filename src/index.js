@@ -1,7 +1,7 @@
-import propTypes from './prop-types'
+import PropTypes from './prop-types'
 import validate from './validate'
 
 module.exports = {
-  propTypes,
+  PropTypes,
   validate
 }
