@@ -2,6 +2,12 @@ import dekuPropTypes from './prop-types'
 
 module.exports.propTypes = dekuPropTypes
 
+/**
+ * Determine if the props are valid
+ * @param {Object} propTypes - an object with values being checkers
+ * @param {Object} props - an object to check for validity
+ * @throws {Error} - if a prop is invalid
+ */
 const validate = (propTypes, props) => {
   Object.keys(propTypes).forEach(key => {
     let result
@@ -17,6 +23,11 @@ const validate = (propTypes, props) => {
   })
 }
 
+/**
+ * Transform a component into a component with prop validation
+ * @param {Function|Object} component - the component to add validation to
+ * @return {Function|Object} -the modified component with validation added
+ */
 module.exports.validate = component => {
   /* eslint-disable no-process-env */
   if (process.env.NODE_ENV === 'production') {
