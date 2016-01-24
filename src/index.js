@@ -1,7 +1,7 @@
-import dekuPropTypes from './prop-types'
+import propTypes from './prop-types'
 import validate from './validate'
 
 module.exports = {
-  propTypes: dekuPropTypes,
+  propTypes,
   validate
 }
