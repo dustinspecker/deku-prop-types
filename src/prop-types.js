@@ -1,4 +1,4 @@
-import checkerFactory from './checker-factory'
+import checkerFactory from 'checker-factory'
 
 module.exports = {
   get any() {

@@ -44,5 +44,8 @@
     "exclude": [
       "tests"
     ]
+  },
+  "dependencies": {
+    "checker-factory": "^1.0.0"
   }
 }
