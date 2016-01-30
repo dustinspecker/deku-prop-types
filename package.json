@@ -46,6 +46,6 @@
     ]
   },
   "dependencies": {
-    "checker-factory": "^1.0.0"
+    "checker-factory": "^2.0.0"
   }
 }

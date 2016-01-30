@@ -2,10 +2,10 @@ import checkerFactory from 'checker-factory'
 
 module.exports = {
   get any() {
-    return checkerFactory('any')
+    return checkerFactory()
   },
   get array() {
-    return checkerFactory('array', (prop, key) => {
+    return checkerFactory((prop, key) => {
       if (!Array.isArray(prop)) {
         const actualType = typeof prop
         return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
@@ -14,7 +14,7 @@ module.exports = {
   },
   get arrayOf() {
     return validator =>
-      checkerFactory('arrayOf', (prop, key) => {
+      checkerFactory((prop, key) => {
         if (!Array.isArray(prop)) {
           const actualType = typeof prop
           return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
@@ -26,14 +26,14 @@ module.exports = {
       })
   },
   get bool() {
-    return checkerFactory('bool', 'boolean')
+    return checkerFactory('boolean')
   },
   get func() {
-    return checkerFactory('func', 'function')
+    return checkerFactory('function')
   },
   get instanceOf() {
     return constructor =>
-      checkerFactory('instanceOf', (prop, key) => {
+      checkerFactory((prop, key) => {
         if (!(prop instanceof constructor)) {
           /* eslint-disable prefer-reflect */
           const actualConstructorName = prop === null ? prop : Object.getPrototypeOf(prop).constructor.name
@@ -44,14 +44,14 @@ module.exports = {
       })
   },
   get number() {
-    return checkerFactory('number', 'number')
+    return checkerFactory('number')
   },
   get object() {
-    return checkerFactory('object', 'object')
+    return checkerFactory('object')
   },
   get objectOf() {
     return validator =>
-      checkerFactory('objectOf', (prop, key) => {
+      checkerFactory((prop, key) => {
         const propKeys = Object.keys(prop)
 
         for (let i = 0; i < propKeys.length; i++) {
@@ -68,7 +68,7 @@ module.exports = {
   },
   get oneOf() {
     return allowedValues =>
-      checkerFactory('oneOf', (prop, key) => {
+      checkerFactory((prop, key) => {
         const isAllowed = allowedValues.some(value => value === prop)
         if (!isAllowed) {
           return new TypeError(`${key} is not one of the allowed values`)
@@ -77,7 +77,7 @@ module.exports = {
   },
   get oneOfType() {
     return allowedTypes =>
-      checkerFactory('oneOfType', (prop, key) => {
+      checkerFactory((prop, key) => {
         const isAllowed = !allowedTypes.every(type => type.validate(prop) instanceof Error)
         if (!isAllowed) {
           return new TypeError(`${key} is not one of the allowed types`)
@@ -86,7 +86,7 @@ module.exports = {
   },
   get shape() {
     return propsObj =>
-      checkerFactory('shape', (prop, key) => {
+      checkerFactory((prop, key) => {
         const validators = Object.keys(propsObj)
 
         for (let i = 0; i < validators.length; i++) {
@@ -102,6 +102,6 @@ module.exports = {
       })
   },
   get string() {
-    return checkerFactory('string', 'string')
+    return checkerFactory('string')
   }
 }
