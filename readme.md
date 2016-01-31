@@ -12,6 +12,10 @@
 npm install --save deku-prop-types
 ```
 
+## Notes
+
+- Check out [deku-prop-types-immutable](https://github.com/dustinspecker/deku-prop-types-immutable) for additional Prop Type validations for [Immutable](https://facebook.github.io/immutable-js/)
+
 ## Usage
 
 **Note: propType validations are not performed in production environments**
