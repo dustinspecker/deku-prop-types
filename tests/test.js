@@ -230,7 +230,7 @@ test('should validate oneOf', t => {
 
   const colorError = types.color.validate(props.color, 'color')
   t.ok(colorError instanceof TypeError)
-  t.is(colorError.message, 'color is not one of the allowed values')
+  t.is(colorError.message, 'Expected color to be `blue`, `red`, or `green`, but got `yellow`')
   t.is(types.state.validate(props.state, 'state'), undefined)
 })
 

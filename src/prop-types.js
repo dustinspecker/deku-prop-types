@@ -1,3 +1,4 @@
+import arrayJoinConjunction from 'array-join-conjunction'
 import checkerFactory from 'checker-factory'
 
 module.exports = {
@@ -71,7 +72,9 @@ module.exports = {
       checkerFactory((prop, key) => {
         const isAllowed = allowedValues.some(value => value === prop)
         if (!isAllowed) {
-          return new TypeError(`${key} is not one of the allowed values`)
+          const valuesMsg = arrayJoinConjunction(allowedValues.map(v => `\`${v}\``), 'or')
+          const errMsg = `Expected ${key} to be ${valuesMsg}, but got \`${prop}\``
+          return new TypeError(errMsg)
         }
       })
   },
