@@ -22,7 +22,7 @@ import {element} from 'deku'
 import {PropTypes, validate} from 'deku-prop-types'
 
 const Counter = ({props}) => <div>{props.count}</div>
-Count.propTypes = {
+Counter.propTypes = {
   count: PropTypes.number.isRequired
 }
 
