@@ -15,6 +15,7 @@ npm install --save deku-prop-types
 ## Notes
 
 - Check out [deku-prop-types-immutable](https://github.com/dustinspecker/deku-prop-types-immutable) for additional Prop Type validations for [Immutable](https://facebook.github.io/immutable-js/)
+- This library is compatible with [eslint-plugin-react's prop-types rule](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prop-types.md)
 
 ## Usage
 
