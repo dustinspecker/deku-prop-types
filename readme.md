@@ -51,6 +51,24 @@ const Counter = {
 export default validate(Counter)
 ```
 
+## Usage with [deku-redux-connect](https://github.com/dustinspecker/deku-redux-connect)
+```jsx
+import connect from deku-redux-connect'
+import {element} from 'deku'
+import {PropTypes, validate} from 'deku-prop-types'
+
+const Counter = ({props}) => <div>{props.count}</div>
+Counter.propTypes = {
+  count: PropTypes.number.isRequired
+}
+
+const mapStateToProps = ({count}) => ({count})
+
+export default connect(
+  mapStateToProps
+)(validate(Counter))
+```
+
 ## Supported types
 ### PropTypes.any
 Validate prop is of any type (not undefined)
