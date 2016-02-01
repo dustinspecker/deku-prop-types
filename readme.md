@@ -53,7 +53,7 @@ export default validate(Counter)
 
 ## Usage with [deku-redux-connect](https://github.com/dustinspecker/deku-redux-connect)
 ```jsx
-import connect from deku-redux-connect'
+import connect from 'deku-redux-connect'
 import {element} from 'deku'
 import {PropTypes, validate} from 'deku-prop-types'
 
