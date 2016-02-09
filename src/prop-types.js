@@ -3,7 +3,7 @@ import checkerFactory from 'checker-factory'
 
 module.exports = {
   get any() {
-    return checkerFactory()
+    return checkerFactory(undefined, 'any')
   },
   get array() {
     return checkerFactory((prop, key) => {
@@ -11,7 +11,7 @@ module.exports = {
         const actualType = typeof prop
         return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
       }
-    })
+    }, 'array')
   },
   get arrayOf() {
     return validator =>
@@ -24,13 +24,13 @@ module.exports = {
         if (anyErrors) {
           return new TypeError(`${key} does not consist of the correct type`)
         }
-      })
+      }, 'arrayOf')
   },
   get bool() {
-    return checkerFactory('boolean')
+    return checkerFactory('boolean', 'bool')
   },
   get func() {
-    return checkerFactory('function')
+    return checkerFactory('function', 'function')
   },
   get instanceOf() {
     return constructor =>
@@ -42,13 +42,13 @@ module.exports = {
             `but got \`${actualConstructorName}\``
           return new TypeError(errorMsg)
         }
-      })
+      }, 'instanceOf')
   },
   get number() {
-    return checkerFactory('number')
+    return checkerFactory('number', 'number')
   },
   get object() {
-    return checkerFactory('object')
+    return checkerFactory('object', 'object')
   },
   get objectOf() {
     return validator =>
@@ -65,7 +65,7 @@ module.exports = {
             return validatorResult
           }
         }
-      })
+      }, 'objectOf')
   },
   get oneOf() {
     return allowedValues =>
@@ -76,16 +76,18 @@ module.exports = {
           const errMsg = `Expected ${key} to be ${valuesMsg}, but got \`${prop}\``
           return new TypeError(errMsg)
         }
-      })
+      }, 'oneOf')
   },
   get oneOfType() {
     return allowedTypes =>
       checkerFactory((prop, key) => {
         const isAllowed = !allowedTypes.every(type => type.validate(prop) instanceof Error)
         if (!isAllowed) {
-          return new TypeError(`${key} is not one of the allowed types`)
+          const typesMsg = arrayJoinConjunction(allowedTypes.map(t => `\`${t.name}\``), 'or')
+          const errMsg = `Expected ${key} to be ${typesMsg}, but got \`${typeof prop}\``
+          return new TypeError(errMsg)
         }
-      })
+      }, 'oneOfType')
   },
   get shape() {
     return propsObj =>
@@ -102,9 +104,9 @@ module.exports = {
             return validatorResult
           }
         }
-      })
+      }, 'shape')
   },
   get string() {
-    return checkerFactory('string')
+    return checkerFactory('string', 'string')
   }
 }

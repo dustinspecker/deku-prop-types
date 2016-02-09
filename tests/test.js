@@ -247,7 +247,7 @@ test('should validate oneOfType', t => {
 
   const colorError = types.color.validate(props.color, 'color')
   t.ok(colorError instanceof TypeError)
-  t.is(colorError.message, 'color is not one of the allowed types')
+  t.is(colorError.message, 'Expected color to be `string` or `number`, but got `object`')
   t.is(types.age.validate(props.age, 'age'), undefined)
 })
 
