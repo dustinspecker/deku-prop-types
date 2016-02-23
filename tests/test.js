@@ -379,5 +379,5 @@ test('should not perform validation when production env', t => {
     name: PropTypes.string
   }
 
-  t.doesNotThrow(() => validate(component)({props}))
+  t.notThrows(() => validate(component)({props}))
 })
