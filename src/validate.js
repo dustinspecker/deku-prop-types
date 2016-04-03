@@ -2,8 +2,15 @@
  * Warns of missing propTypes
  * @param {Object} propTypes - an object with values being checkers
  * @param {Object} props - an object to check for missing propTypes
+ * @param {Number} warningLevel - should warn when missing propType discovered
+ *  0 - do not warn
+ *  1 - console.warn
  */
-const warnOfMissingPropTypes = (propTypes, props) => {
+const warnOfMissingPropTypes = (propTypes, props, warningLevel) => {
+  if (!warningLevel) {
+    return
+  }
+
   const propTypeKeys = Object.keys(propTypes)
   const propsKeys = Object.keys(props)
 
@@ -38,9 +45,10 @@ const validate = (propTypes, props) => {
 /**
  * Transform a component into a component with prop validation
  * @param {Function|Object} component - the component to add validation to
+ * @param {Number} [warningLevel=1] - should warn when missing propType discovered
  * @return {Function|Object} -the modified component with validation added
  */
-module.exports = component => {
+module.exports = (component, warningLevel = 1) => {
   /* eslint-disable no-process-env */
   if (process.env.NODE_ENV === 'production') {
     return component
@@ -48,7 +56,7 @@ module.exports = component => {
 
   if (typeof component === 'function') {
     return model => {
-      warnOfMissingPropTypes(component.propTypes, model.props)
+      warnOfMissingPropTypes(component.propTypes, model.props, warningLevel)
       validate(component.propTypes, model.props)
       return component(model)
     }
@@ -57,7 +65,7 @@ module.exports = component => {
   // create render function that validates and calls original render fn
   const transformedComponent = {
     render(model) {
-      warnOfMissingPropTypes(component.propTypes, model.props)
+      warnOfMissingPropTypes(component.propTypes, model.props, warningLevel)
       validate(component.propTypes, model.props)
       return component.render(model)
     }

@@ -416,6 +416,28 @@ test('should warn when propType is missing by default for component objects', t 
   console.warn.restore()
 })
 
+test('should not warn when propType is missing when configured to not warn', t => {
+  const props = {
+    name: 'dustin',
+    age: 25,
+    year: 1990
+  }
+
+  const component = model => model
+  component.propTypes = {
+    name: PropTypes.string
+  }
+
+  austin.spy(console, 'warn')
+
+  validate(component, 0)({props})
+
+  t.false(console.warn.calledWith('Missing `age` propType'))
+  t.false(console.warn.calledWith('Missing `year` propType'))
+
+  console.warn.restore()
+})
+
 test('should not perform validation when production env', t => {
   /* eslint-disable no-process-env */
   process.env.NODE_ENV = 'production'
