@@ -438,6 +438,24 @@ test('should not warn when propType is missing when configured to not warn', t =
   console.warn.restore()
 })
 
+test('should throw error when propType is missing when configured to throw', t => {
+  const props = {
+    name: 'dustin',
+    age: 25,
+    year: 1990
+  }
+
+  const component = model => model
+  component.propTypes = {
+    name: PropTypes.string
+  }
+
+  const errorTest = () => validate(component, 2)({props})
+
+  t.throws(errorTest, Error)
+  t.throws(errorTest, /Missing `age` propType/)
+})
+
 test('should not perform validation when production env', t => {
   /* eslint-disable no-process-env */
   process.env.NODE_ENV = 'production'

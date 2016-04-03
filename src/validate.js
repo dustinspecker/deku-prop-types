@@ -2,9 +2,11 @@
  * Warns of missing propTypes
  * @param {Object} propTypes - an object with values being checkers
  * @param {Object} props - an object to check for missing propTypes
- * @param {Number} warningLevel - should warn when missing propType discovered
+ * @param {Number} warningLevel - should warn/error when missing propType discovered
  *  0 - do not warn
  *  1 - console.warn
+ *  2 - throw Error
+ * @throws {Error} - if warningLevel is 2 and missing propType discovered
  */
 const warnOfMissingPropTypes = (propTypes, props, warningLevel) => {
   if (!warningLevel) {
@@ -17,7 +19,15 @@ const warnOfMissingPropTypes = (propTypes, props, warningLevel) => {
   propsKeys
     .filter(prop => propTypeKeys.indexOf(prop) === -1)
     .forEach(missingProp => {
-      console.warn(`Missing \`${missingProp}\` propType`)
+      const msg = `Missing \`${missingProp}\` propType`
+
+      if (warningLevel === 1) {
+        console.warn(msg)
+      }
+
+      if (warningLevel === 2) {
+        throw new Error(msg)
+      }
     })
 }
 
