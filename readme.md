@@ -216,11 +216,24 @@ export default validate(Counter)
 ```
 
 ## API
-### validate(component)
+### validate(component, [warningLevel])
 #### component
 type: `function` | `object`
 
 Validate props passed to component match the specified type. An `Error` is thrown if a prop is not valid.
+
+#### warningLevel
+type: `number`
+
+default: 1
+
+If a missing propType is discovered, validate will by default log a warning. This functionality may be configured.
+
+  `0` - Do not warn or throw error
+
+  `1` - Log a warning
+
+  `2` - Throw an error
 
 ## License
 MIT © [Dustin Specker](https://github.com/dustinspecker)
