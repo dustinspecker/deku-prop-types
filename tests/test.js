@@ -1,3 +1,4 @@
+import austin from 'austin'
 import test from 'ava'
 
 import {PropTypes, validate} from '../lib'
@@ -365,6 +366,54 @@ test('should validate props with custom validators', t => {
 
   props.name = 'hii'
   t.same(validate(component)({props}), {props})
+})
+
+test('should warn when propType is missing by default', t => {
+  const props = {
+    name: 'dustin',
+    age: 25,
+    year: 1990
+  }
+
+  const component = model => model
+  component.propTypes = {
+    name: PropTypes.string
+  }
+
+  austin.spy(console, 'warn')
+
+  validate(component)({props})
+
+  t.true(console.warn.calledWith('Missing `age` propType'))
+  t.true(console.warn.calledWith('Missing `year` propType'))
+
+  console.warn.restore()
+})
+
+test('should warn when propType is missing by default for component objects', t => {
+  const props = {
+    name: 'dustin',
+    age: 25,
+    year: 1990
+  }
+
+  const component = {
+    propTypes: {
+      name: PropTypes.string
+    },
+    render(model) {
+      return model
+    }
+  }
+
+  austin.spy(console, 'warn')
+
+  validate(component).render({props})
+
+  t.true(console.warn.calledWith('Missing `age` propType'))
+  t.true(console.warn.calledWith('Missing `year` propType'))
+
+  console.warn.restore()
 })
 
 test('should not perform validation when production env', t => {
