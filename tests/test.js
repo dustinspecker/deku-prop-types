@@ -15,7 +15,7 @@ test('should validate any types', t => {
 
   t.is(types.age.validate(props.age, 'age'), undefined)
   const nameError = types.name.validate(props.name, 'name')
-  t.ok(nameError instanceof Error)
+  t.truthy(nameError instanceof Error)
   t.is(nameError.message, 'name is required')
 })
 
@@ -33,10 +33,10 @@ test('should validate array types', t => {
 
   t.is(types.days.validate(props.days, 'days'), undefined)
   const monthsError = types.months.validate(props.months, 'months')
-  t.ok(monthsError instanceof Error)
+  t.truthy(monthsError instanceof Error)
   t.is(monthsError.message, 'months is required')
   const agesError = types.ages.validate(props.ages, 'ages')
-  t.ok(agesError instanceof TypeError)
+  t.truthy(agesError instanceof TypeError)
   t.is(agesError.message, 'Expected ages to be an `Array`, but got `number`')
 })
 
@@ -54,10 +54,10 @@ test('should validate boolean types', t => {
 
   t.is(types.dead.validate(props.dead, 'dead'), undefined)
   const greenError = types.green.validate(props.green, 'green')
-  t.ok(greenError instanceof Error)
+  t.truthy(greenError instanceof Error)
   t.is(greenError.message, 'green is required')
   const ageError = types.age.validate(props.age, 'age')
-  t.ok(ageError instanceof TypeError)
+  t.truthy(ageError instanceof TypeError)
   t.is(ageError.message, 'Expected age to be of type `boolean`, but got `number`')
 })
 
@@ -73,7 +73,7 @@ test('should validate function types', t => {
 
   t.is(types.validator.validate(props.validator, 'validator'), undefined)
   const encoderError = types.encoder.validate(props.encoder, 'encoder')
-  t.ok(encoderError instanceof Error)
+  t.truthy(encoderError instanceof Error)
   t.is(encoderError.message, 'encoder is required')
 })
 
@@ -94,10 +94,10 @@ test('should validate number types', t => {
 
   t.is(types.age.validate(props.age, 'age'), undefined)
   const yearError = types.year.validate(props.year, 'year')
-  t.ok(yearError instanceof TypeError)
+  t.truthy(yearError instanceof TypeError)
   t.is(yearError.message, 'Expected year to be of type `number`, but got `string`')
   const dayError = types.day.validate(props.day, 'day')
-  t.ok(dayError instanceof Error)
+  t.truthy(dayError instanceof Error)
   t.is(dayError.message, 'day is required')
   t.is(types.week.validate(props.week, 'week'), undefined)
   t.is(types.month.validate(props.month, 'month'), undefined)
@@ -115,7 +115,7 @@ test('should validate object types', t => {
 
   t.is(types.model.validate(props.model, 'model'), undefined)
   const configError = types.config.validate(props.config, 'config')
-  t.ok(configError instanceof Error)
+  t.truthy(configError instanceof Error)
   t.is(configError.message, 'config is required')
 })
 
@@ -136,7 +136,7 @@ test('should validate string types', t => {
 
   t.is(types.name.validate(props.name, 'name'), undefined)
   const cityError = types.city.validate(props.city, 'city')
-  t.ok(cityError instanceof TypeError)
+  t.truthy(cityError instanceof TypeError)
   t.is(cityError.message, 'Expected city to be of type `string`, but got `number`')
   t.is(types.county.validate(props.county, 'county'), undefined)
   t.is(types.sex.validate(props.sex, 'sex'), undefined)
@@ -160,13 +160,13 @@ test('should validate arrayOf', t => {
   t.is(types.names.validate(props.names, 'names'), undefined)
   t.is(types.ages.validate(props.ages, 'ages'), undefined)
   const citiesError = types.cities.validate(props.cities, 'cities')
-  t.ok(citiesError instanceof Error)
+  t.truthy(citiesError instanceof Error)
   t.is(citiesError.message, 'cities is required')
   const oceansError = types.oceans.validate(props.oceans, 'oceans')
-  t.ok(oceansError instanceof TypeError)
+  t.truthy(oceansError instanceof TypeError)
   t.is(oceansError.message, 'oceans does not consist of the correct type')
   const statesError = types.states.validate(props.states, 'states')
-  t.ok(statesError instanceof TypeError)
+  t.truthy(statesError instanceof TypeError)
   t.is(statesError.message, 'Expected states to be an `Array`, but got `string`')
 })
 
@@ -187,10 +187,10 @@ test('should validate instanceOf', t => {
 
   t.is(types.error.validate(props.error, 'error'), undefined)
   const listError = types.list.validate(props.list, 'list')
-  t.ok(listError instanceof TypeError)
+  t.truthy(listError instanceof TypeError)
   t.is(listError.message, 'Expected list to be an instance of `Array`, but got `Object`')
   const nameError = types.name.validate(props.name, 'name')
-  t.ok(nameError instanceof TypeError)
+  t.truthy(nameError instanceof TypeError)
   t.is(nameError.message, 'Expected name to be an instance of `String`, but got `null`')
   t.is(types.dog.validate(props.dog, 'dog'), undefined)
 })
@@ -214,7 +214,7 @@ test('should validate objectOf', t => {
 
   t.is(types.ports.validate(props.ports, 'ports'), undefined)
   const namesError = types.names.validate(props.names, 'names')
-  t.ok(namesError instanceof TypeError)
+  t.truthy(namesError instanceof TypeError)
   t.is(namesError.message, 'Expected names.last to be of type `string`, but got `number`')
 })
 
@@ -230,7 +230,7 @@ test('should validate oneOf', t => {
   }
 
   const colorError = types.color.validate(props.color, 'color')
-  t.ok(colorError instanceof TypeError)
+  t.truthy(colorError instanceof TypeError)
   t.is(colorError.message, 'Expected color to be `blue`, `red`, or `green`, but got `yellow`')
   t.is(types.state.validate(props.state, 'state'), undefined)
 })
@@ -247,7 +247,7 @@ test('should validate oneOfType', t => {
   }
 
   const colorError = types.color.validate(props.color, 'color')
-  t.ok(colorError instanceof TypeError)
+  t.truthy(colorError instanceof TypeError)
   t.is(colorError.message, 'Expected color to be `string` or `number`, but got `object`')
   t.is(types.age.validate(props.age, 'age'), undefined)
 })
@@ -277,7 +277,7 @@ test('should validate shape', t => {
 
   t.is(types.config.validate(props.config, 'config'), undefined)
   const optionsError = types.options.validate(props.options, 'options')
-  t.ok(optionsError instanceof TypeError)
+  t.truthy(optionsError instanceof TypeError)
   t.is(optionsError.message, 'Expected options.host to be of type `string`, but got `number`')
 })
 
@@ -312,10 +312,10 @@ test('should validate deep props', t => {
   }
 
   const personNameError = types.person.validate(props.person, 'person')
-  t.ok(personNameError instanceof TypeError)
+  t.truthy(personNameError instanceof TypeError)
   t.is(personNameError.message, 'Expected person.name.last to be of type `string`, but got `number`')
   const optionsPathError = types.options.validate(props.options, 'options')
-  t.ok(optionsPathError instanceof Error)
+  t.truthy(optionsPathError instanceof Error)
   t.is(optionsPathError.message, 'options.path.host is required')
 })
 
@@ -342,8 +342,8 @@ test('should validate props', t => {
   t.is(objComponent.other(), 3)
 
   types.county = PropTypes.number
-  t.same(validate(component)({props}), {props})
-  t.same(validate(objComponent).render({props}), {props})
+  t.deepEqual(validate(component)({props}), {props})
+  t.deepEqual(validate(objComponent).render({props}), {props})
 })
 
 test('should validate props with custom validators', t => {
@@ -365,7 +365,7 @@ test('should validate props with custom validators', t => {
   t.throws(() => validate(component)({props}), /name is invalid/)
 
   props.name = 'hii'
-  t.same(validate(component)({props}), {props})
+  t.deepEqual(validate(component)({props}), {props})
 })
 
 test('should warn when propType is missing by default', t => {
