@@ -68,6 +68,7 @@ module.exports = (component, warningLevel = 1) => {
     return model => {
       warnOfMissingPropTypes(component.propTypes, model.props, warningLevel)
       validate(component.propTypes, model.props)
+
       return component(model)
     }
   }
@@ -77,6 +78,7 @@ module.exports = (component, warningLevel = 1) => {
     render(model) {
       warnOfMissingPropTypes(component.propTypes, model.props, warningLevel)
       validate(component.propTypes, model.props)
+
       return component.render(model)
     }
   }
@@ -86,5 +88,6 @@ module.exports = (component, warningLevel = 1) => {
       transformedComponent[key] = component[key]
     }
   })
+
   return transformedComponent
 }

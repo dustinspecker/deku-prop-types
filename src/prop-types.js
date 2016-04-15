@@ -9,6 +9,7 @@ module.exports = {
     return checkerFactory((prop, key) => {
       if (!Array.isArray(prop)) {
         const actualType = typeof prop
+
         return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
       }
     }, 'array')
@@ -18,6 +19,7 @@ module.exports = {
       checkerFactory((prop, key) => {
         if (!Array.isArray(prop)) {
           const actualType = typeof prop
+
           return new TypeError(`Expected ${key} to be an \`Array\`, but got \`${actualType}\``)
         }
         const anyErrors = prop.some(p => validator.validate(p) instanceof Error)
@@ -40,6 +42,7 @@ module.exports = {
           const actualConstructorName = prop === null ? prop : Object.getPrototypeOf(prop).constructor.name
           const errorMsg = `Expected ${key} to be an instance of \`${constructor.name}\`, ` +
             `but got \`${actualConstructorName}\``
+
           return new TypeError(errorMsg)
         }
       }, 'instanceOf')
@@ -74,6 +77,7 @@ module.exports = {
         if (!isAllowed) {
           const valuesMsg = arrayJoinConjunction(allowedValues.map(v => `\`${v}\``), 'or')
           const errMsg = `Expected ${key} to be ${valuesMsg}, but got \`${prop}\``
+
           return new TypeError(errMsg)
         }
       }, 'oneOf')
@@ -85,6 +89,7 @@ module.exports = {
         if (!isAllowed) {
           const typesMsg = arrayJoinConjunction(allowedTypes.map(t => `\`${t.name}\``), 'or')
           const errMsg = `Expected ${key} to be ${typesMsg}, but got \`${typeof prop}\``
+
           return new TypeError(errMsg)
         }
       }, 'oneOfType')
